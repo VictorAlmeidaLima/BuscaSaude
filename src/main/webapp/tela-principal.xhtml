@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+<head jsf:id="head">
+    <title>Power House GYM</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/estilo.css"/>
+</head>
+<body jsf:id="body">
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid jumbotron" style="background-color: black;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/" style="color: white;">Power House GYM</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<nav class="navbar navbar-default sidebar" role="navigation">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>      
+    </div>
+    <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+          <ul class="dropdown-menu forAnimate" role="menu">
+            <li><a href="cadastrar.xhtml">Parceiro</a></li>
+            <li><a href="#meuModal" data-toggle="modal" data-target="#meuModal">Parceiro 2</a></li>
+          </ul>
+        </li>          
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="modal" id="meuModal" role="dialog" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Cadastro de Clientes</h4>
+      </div>
+      <div class="modal-body">
+            <form jsf:id="form" jsf:prependId="false">
+                <fieldset>
+                    <legend>Dados pessoais</legend>
+                    <div class="form-group">
+                                  <label>Nome</label> 
+                                  <input type="text" 
+                                  jsf:id="nomeParc"
+                                  jsf:binding="#{nomeParc}"
+                                  class="form-control"
+                                  placeholder="nome Parceiro"
+                                  jsf:value="#{parceiroBean.parceiro.nomeParc}" />
+                                  <h:message for="nomeParc" styleClass="text-danger"/>
+                              </div>
+
+                              <div class="form-group">    
+                                  <label>Email</label> 
+                                  <input type="text" 
+                                  jsf:id="email"
+                                  jsf:binding="#{email}"
+                                  class="form-control"
+                                  placeholder="e-mail"
+                                  jsf:value="#{parceiroBean.parceiro.email}" />
+                                  <h:message for="email" styleClass="text-danger"/>
+                              </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group #{!cpf_cnpj.valid ? 'has-error' : ''}">
+                                <label jsf:for="cpf_cnpj">cpf_cnpj</label>
+                                <input type="text"
+                                       jsf:id="cpf_cnpj"
+                                       jsf:binding="#{cpf_cnpj}"
+                                       class="form-control"
+                                       placeholder="000.000.000-00"
+                                       jsf:value="#{parceiroBean.parceiro.cpf_cnpj}"
+                                       required="required"/>
+
+                                <h:message for="cpf_cnpj" styleClass="text-danger"/>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group #{!dtNascimento.valid ? 'has-error' : ''}">
+                                <label jsf:for="dtNascimento">Data Nascimento</label>
+                                <input type="date"
+                                       jsf:id="dtNascimento"
+                                       jsf:binding="#{dtNascimento}"
+                                       class="form-control"
+                                       jsf:value="#{parceiroBean.parceiro.dtNascimento}"
+                                       required="required">
+                                    <f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{initParam.timezone}"/>
+                                </input>
+
+                                <h:message for="dtNascimento" styleClass="text-danger"/>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                        </div>
+                    </div>
+                </fieldset>
+                <button 
+                       class="btn btn-block btn-info"
+                       
+                       value="Enviar">Enviar</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+          </div>
+            <button 
+                       class="btn btn-block btn-info"
+                       
+                       value="Enviar">Enviar</button>
+          </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

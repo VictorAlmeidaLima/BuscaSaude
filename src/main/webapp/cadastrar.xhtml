@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui">
+<head jsf:id="head">
+    <title>Power House GYM</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/estilo.css"/>
+</head>
+<body jsf:id="body">
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="tela-principal.xhtml">Power System GYM</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+<div class="container">
+
+   <p:messages id="messages" showDetail="true" closable="true">
+                            <p:autoUpdate />
+                        </p:messages>
+
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Parceiros Cadastrados</button>
+  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">Novo Parceiro</button>
+</div>
+
+  <div class="container">
+  <div id="demo" class="collapse in">
+    <div class="container">
+
+      
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h3 class="text-center">Parceiros Cadastrados</h3>
+            </div>
+        </div>
+    </nav>
+            <div class="row">
+                <div class="col-md-12">
+                    <p:dataTable var="parceiro" value="#{parceiroBean.parceiros}" class="form-group">
+                        <p:column headerText="Nome Parceiro">
+                            <h:outputText value="#{parceiro.nomeParc}" />
+                        </p:column>
+
+                        <p:column headerText="Data Cadastro">
+                            <h:outputText value="#{parceiro.dtCadastro}" />
+                        </p:column>
+
+                        <p:column headerText="Email">
+                            <h:outputText value="#{parceiro.email}" />
+                        </p:column>
+
+                        <p:column headerText="Telefone">
+                            <h:outputText value="#{parceiro.telefone}" />
+                        </p:column>
+
+                        <p:column headerText="Tipo Parceiro">
+                            <h:outputText value="#{parceiro.tipoParceiro}" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </div>  
+      </div>
+
+      <div id="demo2" class="collapse">
+
+        <div class="container">
+          
+           <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h3 class="text-center">Cadastrar novo Parceiro</h3>
+            </div>
+        </div>
+    </nav>
+
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
+                    <form jsf:id="form">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text"
+                                   jsf:id="nomeParc"
+                                   jsf:binding="#{nomeParc}"
+                                   class="form-control"
+                                   placeholder="nome Parceiro"
+                                   jsf:value="#{parceiroBean.parceiro.nomeParc}" />
+                            <h:message for="nomeParc" styleClass="text-danger"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text"
+                                   jsf:id="email"
+                                   jsf:binding="#{email}"
+                                   class="form-control"
+                                   placeholder="e-mail"
+                                   jsf:value="#{parceiroBean.parceiro.email}" />
+                            <h:message for="email" styleClass="text-danger"/>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4 col-lg-4">
+                                <label>Telefone</label>
+                                <input type="tel"
+                                       jsf:id="telefone"
+                                       jsf:binding="#{telefone}"
+                                       class="form-control"
+                                       placeholder="(31)0000-0000"
+                                       jsf:value="#{parceiroBean.parceiro.telefone}" />
+                                <h:message for="telefone" styleClass="text-danger"/>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <label>Idade</label>
+                                <input type="number"
+                                       jsf:id="idade"
+                                       jsf:biding="#{idade}"
+                                       class="form-control"
+                                       placeholder="00"
+                                       value="#{parceiroBean.parceiro.idade}"/>
+                                <h:message for="idade" styleClass="text-danger"/>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <label jsf:for="dtCadastro">Data Cadastro</label>
+                                <input type="date"
+                                       jsf:id="dtCadastro"
+                                       jsf:binding="#{dtCadastro}"
+                                       class="form-control"
+                                       jsf:value="#{parceiroBean.parceiro.dtCadastro}"
+                                       required="required">
+                                    <f:convertDateTime pattern="yyyy-MM-dd"  timeZone="#{initParam.timezone}"/>
+                                    <h:message for="dtCadastro" styleClass="text-danger"/>
+                                </input>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4 col-lg-4">
+                                <label>CPF/CNPJ</label>
+                                <input type="text"
+                                       jsf:id="cpf_cnpj"
+                                       jsf:binding="#{cpf_cnpj}"
+                                       class="form-control"
+                                       placeholder="CPF / CNPJ"
+                                       value="#{parceiroBean.parceiro.cpf_cnpj}" />
+                                <h:message for="cpf_cnpj" styleClass="text-danger"/>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <label jsf:for="dtNascimento">Data Nascimento</label>
+                                <input type="date"
+                                       jsf:id="dtNascimento"
+                                       jsf:binding="#{dtNascimento}"
+                                       class="form-control"
+                                       jsf:value="#{parceiroBean.parceiro.dtNascimento}"
+                                       required="required">
+                                    <f:convertDateTime pattern="yyyy-MM-dd"  timeZone="#{initParam.timezone}"/>
+                                    <h:message for="dtNascimento" styleClass="text-danger"/>
+                                </input>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <label jsf:for="tipoParceiro">Tipo Parceiro</label>
+                                <select jsf:id="tipoParceiro"
+                                        jsf:binding="#{tipoParceiro}"
+                                        size="1"
+                                        class="form-control"
+                                        jsf:value="#{parceiroBean.parceiro.tipoParceiro}"
+                                        required="required">
+                                    <ui:repeat value="#{parceiroBean.tipoParceiro}"
+                                               var="tipoParceiro"
+                                               itemLabel="#{tipoParceiro.descricao}"
+                                               itemValue="#{tipoParceiro}"
+                                               jsfc="f:selectItems">
+                                    </ui:repeat>
+                                </select>
+                            </div>
+                        </div>
+                        <input jsf:action="#{parceiroBean.inserir}" type="submit" class="btn btn-primary" value="Enviar"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+</div>
+
+<h:outputScript name="js/jquery-3.2.1.min.js"/>
+<h:outputScript name="bootstrap/3.3.7/js/bootstrap.min.js"/>
+<h:outputScript name="js/jquery.mask.min.js"/>
+<h:outputScript name="js/jquery.maskMoney.min.js"/>
+<h:outputScript name="js/jquery.validate.min.js"/>
+<h:outputScript name="js/additional-methods.min.js"/>
+<h:outputScript name="js/localization/messages_pt_BR.min.js"/>
+<h:outputScript name="js/script.js"/>
+</body>
+</html>

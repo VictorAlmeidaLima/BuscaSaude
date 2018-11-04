@@ -1,0 +1,28 @@
+#form-container{
+	width: 100vw;
+	height: 100vh;
+	background: #6C7A89;
+	background-image: url("../img/saude.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#form-box{
+	width: 380px;
+	padding: 20px;
+	box-sizing: border-box;
+	background-color: green;
+}
+
+#form-box input{
+	font-size: large;
+}
+
+.logo{
+	background-color: black;
+	background-size: 100%;
+}
